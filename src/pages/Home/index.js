@@ -7,7 +7,7 @@ function Home() {
       <header className="header">
         <div className="toolbar">
           <div>
-            <a href="/">Conecta Dev</a>
+            <a href="/">Conecta Dev - Alteração</a>
             <input type="text"></input>           
           </div>
           <div>
