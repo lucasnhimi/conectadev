@@ -9,7 +9,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(2),
-    width: 275
+    width: 275,
+    marginRight: theme.spacing(2),
   },
   button: {
     width: '100%'
