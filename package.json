@@ -12,6 +12,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-feather": "^2.0.8",
+    "react-router": "^6.0.0-alpha.4",
+    "react-router-dom": "^6.0.0-alpha.4",
     "react-scripts": "3.4.1"
   },
   "scripts": {
