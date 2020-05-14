@@ -7,11 +7,7 @@ import Home from './pages/Home';
 import theme from './theme';
 
 function App() {
-  console.log(window.location.href)
-
-  const url = window.location.href;
-
-  return (
+   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
