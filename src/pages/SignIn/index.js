@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -9,12 +9,12 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import { useNavigate } from 'react-router-dom';
-import axios from '../../utils/axios';
+import FormHelperText from '@material-ui/core/FormHelperText';
+
+import authService from '../../services/authService';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // display: 'flex',
-    // flexDirection: 'row',
     height: '100vh'
   },
 
@@ -36,29 +36,6 @@ const useStyles = makeStyles((theme) => ({
   form: {
     margin: theme.spacing(2, 4)
   }
-  
-  // left: {
-  //   background: 'blue',    
-  //   flexBasis: "58%",
-
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   justifyContent: 'center',
-  //   alignItems: 'center'
-  // },
-
-  // right: {
-  //   background: 'yellow',    
-  //   flexBasis: "42%"
-  // },
-
-  // form: {
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   margin: '64px 32px',
-  //   alignItems: 'center'
-  // }
-
 }));
 
 function Copyright() {
@@ -76,24 +53,17 @@ function Copyright() {
 function SignIn() {
   const classes = useStyles();
   const navigate = useNavigate();
-
-  // function handleSignIn() {
-  //   // chamada a api da nossa aplicação
-  //   // se retorno ok, direciona para home
-  //   // senao exibe mensagem para o usuario
-  //   axios.post('/api/home/login')
-  //     .then(response => console.log(response));
-
-  // }
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState();
 
   async function handleSignIn() {
-    // chamada a api da nossa aplicação
-    // se retorno ok, direciona para home
-    // senao exibe mensagem para o usuario
-
-    const response = await axios.post('/api/home/login');
-    console.log(response);
-
+    try {
+      await authService.signIn(email, password);
+      navigate('/');
+    } catch (error) {
+      setErrorMessage(error.response.data.message);
+    }
   }
 
   return (
@@ -133,6 +103,8 @@ function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
             />
             <TextField
               variant="outlined"
@@ -144,6 +116,8 @@ function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
             />   
             <Button fullWidth
               variant="contained"
@@ -152,6 +126,12 @@ function SignIn() {
               onClick={handleSignIn}>
               Entrar
             </Button>
+            {
+              errorMessage &&
+              <FormHelperText error>
+                {errorMessage}
+              </FormHelperText>
+            }
             <Grid container>
               <Grid item>
                 <Link>Esqueceu sua senha?</Link>
@@ -165,31 +145,6 @@ function SignIn() {
         </Box>
       </Grid>
     </Grid>
-
-
-    // /* Flex Container */
-    // <div className={classes.root}>
-      
-    //   {/* Flex item container */}
-    //   <div className={classes.left}>
-    //   <Typography style={{color: '#fff', fontSize: 35, lineHeight: '45px'}}>
-    //     <strong>Simplificando a forma de conectar desenvolvedores de software!</strong>
-    //   </Typography>
-    //   <Typography variant="body2" style={{color: 'rgb(255,255,255, 0.7)', marginTop: 30, fontSize: 15, lineHeight: '30px'}}>
-    //     Compartilhe seu conhecimento com toda nossa rede de desenvolvedores de software.
-    //   </Typography>
-    //   </div>
-
-    //   {/* Flex item */}
-    //   <div className={classes.right}>
-    //     <form className={classes.form}>
-    //       <h4>Acesso</h4>
-    //       <input type="text" />
-    //       <input type="text" />
-    //     </form>
-    //   </div>
-      
-    // </div>
   )
 }
 
