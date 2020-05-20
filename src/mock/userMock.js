@@ -17,7 +17,8 @@ mock.onPost('/api/home/login').reply((config) => {
     id: 1,
     name: 'Lucas Nhimi',
     username: 'lucasnhimi',
-    email: 'lucasnhimi@lucasnhimi.com.br'
+    email: 'lucasnhimi@lucasnhimi.com.br',
+    avatar: '/images/avatars/avatar_1.jpeg'
   }
 
 

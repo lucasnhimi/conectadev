@@ -6,7 +6,7 @@ import Home from '../pages/Home';
 
 function GuestRoute({element: Component, ...rest}) {
   const isAuthenticated = authService.isAuthenticated();
-  console.log(isAuthenticated)
+  
   return (
     <Route {...rest} element={(
       isAuthenticated
