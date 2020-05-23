@@ -16,7 +16,7 @@ import { signIn } from '../../actions/accountActions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh'
+    height: '100vh',
   },
 
   image: {
@@ -25,30 +25,33 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundRepeat: 'none',
     padding: theme.spacing(2),
-    textAlign: "center"
+    textAlign: 'center',
   },
   avatar: {
     background: theme.palette.primary.main,
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
   },
   button: {
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   form: {
-    margin: theme.spacing(2, 4)
-  }
+    margin: theme.spacing(2, 4),
+  },
 }));
 
 function Copyright() {
   return (
     <Typography variant="body2" align="center">
       {'Copyright © '}
-      <a color="inherit" href="https://www.youtube.com/channel/UCVE9-HO_GzLtDK4IGKVSYXA">
+      <a
+        color="inherit"
+        href="https://www.youtube.com/channel/UCVE9-HO_GzLtDK4IGKVSYXA"
+      >
         Lucas Nhimi
       </a>{' '}
       {new Date().getFullYear()}
     </Typography>
-  )
+  );
 }
 
 function SignIn() {
@@ -58,41 +61,50 @@ function SignIn() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState();
   const dispatch = useDispatch();
- 
+
   async function handleSignIn() {
     try {
-      await dispatch(signIn(email, password));      
+      await dispatch(signIn(email, password));
       navigate('/');
-    } catch (error) {      
+    } catch (error) {
       setErrorMessage(error.response.data.message);
     }
   }
   return (
     <Grid container className={classes.root}>
-      <Grid 
-        item 
-        container 
+      <Grid
+        item
+        container
         direction="column"
         justify="center"
         alignItems="center"
         md={7}
-        className={classes.image}>
-        <Typography style={{color: '#fff', fontSize: 35, lineHeight: '45px'}}>
-          <strong>Simplificando a forma de conectar desenvolvedores de software!</strong>
+        className={classes.image}
+      >
+        <Typography style={{ color: '#fff', fontSize: 35, lineHeight: '45px' }}>
+          <strong>
+            Simplificando a forma de conectar desenvolvedores de software!
+          </strong>
         </Typography>
-        <Typography variant="body2" style={{color: 'rgb(255,255,255, 0.7)', marginTop: 30, fontSize: 15, lineHeight: '30px'}}>
-          Compartilhe seu conhecimento com toda nossa rede de desenvolvedores de software.
+        <Typography
+          variant="body2"
+          style={{
+            color: 'rgb(255,255,255, 0.7)',
+            marginTop: 30,
+            fontSize: 15,
+            lineHeight: '30px',
+          }}
+        >
+          Compartilhe seu conhecimento com toda nossa rede de desenvolvedores de
+          software.
         </Typography>
       </Grid>
       <Grid item md={5}>
-        <Box display="flex" flexDirection="column"
-          alignItems="center" mt={8}>
+        <Box display="flex" flexDirection="column" alignItems="center" mt={8}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography variant="h5">
-            Acesso
-          </Typography>
+          <Typography variant="h5">Acesso</Typography>
           <form className={classes.form}>
             <TextField
               variant="outlined"
@@ -119,20 +131,19 @@ function SignIn() {
               autoComplete="current-password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-            />   
-            <Button fullWidth
+            />
+            <Button
+              fullWidth
               variant="contained"
               color="primary"
               className={classes.button}
-              onClick={handleSignIn}>
+              onClick={handleSignIn}
+            >
               Entrar
             </Button>
-            {
-              errorMessage &&
-              <FormHelperText error>
-                {errorMessage}
-              </FormHelperText>
-            }
+            {errorMessage && (
+              <FormHelperText error>{errorMessage}</FormHelperText>
+            )}
             <Grid container>
               <Grid item>
                 <Link>Esqueceu sua senha?</Link>
@@ -146,7 +157,7 @@ function SignIn() {
         </Box>
       </Grid>
     </Grid>
-  )
+  );
 }
 
 export default SignIn;
