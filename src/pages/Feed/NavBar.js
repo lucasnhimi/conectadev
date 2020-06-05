@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   button: {
-    width: '100%'
-  }
+    width: '100%',
+  },
 }));
 
 const tags = [
@@ -24,27 +24,25 @@ const tags = [
   { id: 4, name: 'php' },
   { id: 5, name: 'materialdesign' },
   { id: 6, name: 'webdev' },
-]
+];
 
 function NavBar() {
   const classes = useStyles();
 
   return (
     <Paper className={classes.root}>
-      <Button variant="outlined" color="secondary" className={classes.button}>Registrar Gratis</Button>
+      <Button variant="outlined" color="secondary" className={classes.button}>
+        Registrar Gratis
+      </Button>
       <ListSubheader>{`Tags em alta`}</ListSubheader>
-      {
-        tags.map((item) => (
-          <ListItem dense button key={`item-${item.id}-${item.name}`}>
-            <ListItemText primary={`#${item.name}`} />
-          </ListItem>
-        ))
-      }
-      <ListItem button>
-        Exibir mais Tags
-      </ListItem>   
+      {tags.map((item) => (
+        <ListItem dense button key={`item-${item.id}-${item.name}`}>
+          <ListItemText primary={`#${item.name}`} />
+        </ListItem>
+      ))}
+      <ListItem button>Exibir mais Tags</ListItem>
     </Paper>
-  )
+  );
 }
 
 export default NavBar;

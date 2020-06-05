@@ -9,24 +9,22 @@ import SignIn from './pages/SignIn';
 import Home from './pages/Home';
 import theme from './theme';
 import store from './store';
-
 import './mock';
 
 function App() {
-   return (
-     <Provider store={store}>
+  return (
+    <Provider store={store}>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Auth>
             <Routes>
-              <Route path="/" element={<Home />} />
               <GuestRoute path="/sign-in" element={<SignIn />} />
-              <Route path="*" element={<h1>404!</h1>} />
+              <Route path="//*" element={<Home />} />
             </Routes>
           </Auth>
         </BrowserRouter>
       </ThemeProvider>
-     </Provider>
+    </Provider>
   );
 }
 

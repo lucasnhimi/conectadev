@@ -20,7 +20,7 @@ import {
   Users as ConnectionIcon,
 } from 'react-feather';
 
-import { getNotifications } from '../../../../actions/notificationsActions';
+import { getNotifications } from '../../../actions/notificationsActions';
 
 const iconsMap = {
   reviews: StarIcon,
