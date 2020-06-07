@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.9.12",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.55",
     "@material-ui/styles": "^4.9.10",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -14,7 +15,9 @@
     "moment": "^2.26.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-dropzone": "^11.0.1",
     "react-feather": "^2.0.8",
+    "react-markdown": "^4.3.1",
     "react-redux": "^7.2.0",
     "react-router": "^6.0.0-alpha.4",
     "react-router-dom": "^6.0.0-alpha.4",
