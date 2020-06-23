@@ -9,81 +9,83 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import BookmarkIcon from '@material-ui/icons/Bookmark';
 import MessageIcon from '@material-ui/icons/Message';
-
+import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
   subheader: {
     display: 'flex',
-    alignItems: 'cen'
+    alignItems: 'center',
   },
   caption: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   message: {
     height: 'auto',
     marginBottom: theme.spacing(2),
-    padding: '0 24px'
+    padding: '0 24px',
   },
   image: {
     height: 300,
     width: '100%',
-    maxWidth: '100%'
+    maxWidth: '100%',
   },
   content: {
-    padding: 0
+    padding: 0,
   },
   favorite: {
-    marginLeft: 'auto'
-  }
-}))
+    marginLeft: 'auto',
+  },
+}));
 
 function PostCard({ post }) {
   const classes = useStyles();
-  
+  const navigate = useNavigate();
+
+  const handlePostClick = () => {
+    navigate(`/post/${post.slug}`);
+  };
+
   return (
-    <Card className={classes.root}>
-      <CardHeader 
-        avatar={<Avatar src={post.author.avatar} />}
+    <Card className={classes.root} onClick={handlePostClick}>
+      <CardHeader
+        avatar={<Avatar src={post.author?.avatar} />}
         title={<Typography variant="h6">{post.title}</Typography>}
         subheader={
           <div className={classes.subheader}>
             <Typography variant="caption" className={classes.caption}>
-              {'Avaliado por'}
-            </Typography> 
+              Escrito por
+            </Typography>
             <Typography variant="subtitle2" className={classes.caption}>
               {post.author.name}
-            </Typography> 
+            </Typography>
             <Typography variant="caption" className={classes.caption}>
-              {post.date}
-            </Typography> 
+              {moment(post.date).fromNow()}
+            </Typography>
           </div>
         }
-        />
+      />
       <CardContent className={classes.content}>
-        <Typography
-          className={classes.message}
-          variant="body1"
-        >
+        <Typography className={classes.message} variant="body1">
           {post.hashtags}
         </Typography>
         <CardActionArea>
-          <img src={post.image} className={classes.image} alt="img"/>
+          <img src={post.image} className={classes.image} alt="img" />
         </CardActionArea>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="like">
           <FavoriteIcon />
           <Typography
-            style={{cursor: 'pointer'}}
+            style={{ cursor: 'pointer' }}
             color="textSecondary"
             variant="body2"
           >
-            {'10'}
+            {post.likes}
           </Typography>
         </IconButton>
         <IconButton aria-label="comment">
@@ -93,15 +95,12 @@ function PostCard({ post }) {
             color="textSecondary"
             variant="body2"
           >
-            {'30'}
-          </Typography>       
-        </IconButton>  
-        <IconButton aria-label="favorite" className={classes.favorite}>
-          <BookmarkIcon />
-        </IconButton>    
+            {post.comments}
+          </Typography>
+        </IconButton>
       </CardActions>
-    </Card>  
-  )
+    </Card>
+  );
 }
 
 export default PostCard;
