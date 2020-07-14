@@ -13,7 +13,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
 
 import {
-  Bell as BellIcon,
+  MoreVertical as BellIcon,
   Star as StarIcon,
   MessageCircle as MessageIcon,
   Heart as HeartIcon,

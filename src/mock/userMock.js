@@ -27,3 +27,15 @@ mock.onPost('/api/home/login').reply((config) => {
 
   return [200, { user }];
 });
+
+mock.onGet('/api/home/user/lucasnhimi').reply(200, {
+  id: 1,
+  name: 'Lucas Nhimi x',
+  username: 'lucasnhimi',
+  email: 'email@conectadev.com',
+  accessToken: 'dadadadadadadad',
+  avatar: '/images/avatars/avatar_1.jpeg',
+  joinedIn: '06 de janeiro, 2020',
+  work: 'Arquiteto de Software',
+  totalPost: '388',
+});

@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useNavigate } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import ListSubheader from '@material-ui/core/ListSubheader';
@@ -28,13 +29,19 @@ const tags = [
 
 function NavBar() {
   const classes = useStyles();
+  const navigate = useNavigate();
 
   return (
     <Paper className={classes.root}>
-      <Button variant="outlined" color="secondary" className={classes.button}>
+      <Button
+        variant="outlined"
+        color="secondary"
+        className={classes.button}
+        onClick={() => navigate('/sign-up')}
+      >
         Registrar Gratis
       </Button>
-      <ListSubheader>{`Tags em alta`}</ListSubheader>
+      <ListSubheader>Tags em alta</ListSubheader>
       {tags.map((item) => (
         <ListItem dense button key={`item-${item.id}-${item.name}`}>
           <ListItemText primary={`#${item.name}`} />

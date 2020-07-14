@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import Auth from './components/Auth';
 import GuestRoute from './routes/GuestRoute';
 import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 import Home from './pages/Home';
 import theme from './theme';
 import store from './store';
@@ -19,6 +20,7 @@ function App() {
           <Auth>
             <Routes>
               <GuestRoute path="/sign-in" element={<SignIn />} />
+              <GuestRoute path="/sign-up" element={<SignUp />} />
               <Route path="//*" element={<Home />} />
             </Routes>
           </Auth>
