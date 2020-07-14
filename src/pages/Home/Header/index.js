@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import WritePost from './WritePost';
 import Notifications from './Notifications';
 import Account from './Account';
+import Settings from './Settings';
 
 const useStyles = makeStyles({
   appBar: {
@@ -39,6 +40,9 @@ function Header() {
           <WritePost />
           <Box ml={2}>
             <Notifications />
+          </Box>
+          <Box ml={2}>
+            <Settings />
           </Box>
           <Box ml={2}>
             <Account />
