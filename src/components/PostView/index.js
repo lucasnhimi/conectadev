@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     marginRight: theme.spacing(1),
   },
+  markdown: {
+    color: theme.palette.text.primary,
+  },
 }));
 
 function PostView({ post }) {
@@ -26,21 +29,25 @@ function PostView({ post }) {
   return (
     <Container maxWidth="lg">
       <Box mb={2}>
-        <Typography variant="h2">{title}</Typography>
+        <Typography variant="h2" color="textPrimary">
+          {title}
+        </Typography>
       </Box>
       <Box display="flex" alignItems="center" mb={2}>
         <Box>
           <Avatar className={classes.avatar} src={author?.avatar} />
         </Box>
         <Box>
-          <Typography variant="body1">{author?.name}</Typography>
+          <Typography variant="body1" color="textPrimary">
+            {author?.name}
+          </Typography>
           <Typography variant="body2" color="textSecondary">
             {moment(date).fromNow()}
           </Typography>
         </Box>
       </Box>
       <Box mb={2}>
-        <Typography variant="body1">
+        <Typography variant="body1" color="textPrimary">
           {tags?.map((item) => item).join(', ')}
         </Typography>
       </Box>
@@ -63,7 +70,7 @@ function PostView({ post }) {
       </Box>
       <Divider />
       <Box mb={8}>
-        <Markdown source={markdownText} />
+        <Markdown source={markdownText} className={classes.markdown} />
       </Box>
     </Container>
   );
