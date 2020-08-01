@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.dark,
   },
   main: {
-    height: 'calc(100vh - 64px)',
     padding: 24,
   },
   toolbar: {

@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { usePost } from '../../../../context/PostContext';
+// import { usePost } from '../../../../context/PostContext';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -17,15 +17,15 @@ const useStyles = makeStyles(() => ({
 
 function BottomBar() {
   const classes = useStyles();
-  const ctx = usePost();
+  // const ctx = usePost();
 
-  const handleSaveDraft = () => {
-    // acessar backend e salvar o rascunho
-  };
+  // const handleSaveDraft = () => {
+  //   // acessar backend e salvar o rascunho
+  // };
 
-  const handlePublish = () => {
-    // acessar o backend e publicar este post
-  };
+  // const handlePublish = () => {
+  //   // acessar o backend e publicar este post
+  // };
 
   return (
     <AppBar position="fixed" color="inherit" className={classes.appBar}>

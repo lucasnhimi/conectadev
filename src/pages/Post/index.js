@@ -11,7 +11,7 @@ function Post() {
   const getPost = useCallback(async () => {
     const feed = await axios.get(`/api/post/${params.slug}`);
     setPost(feed.data);
-  }, [setPost]);
+  }, [setPost, params.slug]);
 
   useEffect(() => {
     getPost();

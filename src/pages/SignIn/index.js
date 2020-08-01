@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -11,7 +11,8 @@ import Link from '@material-ui/core/Link';
 import { useNavigate } from 'react-router-dom';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { useDispatch } from 'react-redux';
-
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 import { signIn } from '../../actions/accountActions';
 
 const useStyles = makeStyles((theme) => ({
@@ -57,19 +58,8 @@ function Copyright() {
 function SignIn() {
   const classes = useStyles();
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState();
   const dispatch = useDispatch();
 
-  async function handleSignIn() {
-    try {
-      await dispatch(signIn(email, password));
-      navigate('/');
-    } catch (error) {
-      setErrorMessage(error.response.data.message);
-    }
-  }
   return (
     <Grid container className={classes.root}>
       <Grid
@@ -105,54 +95,94 @@ function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography variant="h5">Acesso</Typography>
-          <form className={classes.form}>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="E-mail"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Senha"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              onClick={handleSignIn}
-            >
-              Entrar
-            </Button>
-            {errorMessage && (
-              <FormHelperText error>{errorMessage}</FormHelperText>
+          <Formik
+            initialValues={{
+              email: '',
+              password: '',
+            }}
+            validationSchema={Yup.object().shape({
+              email: Yup.string()
+                .email('Favor informar um email válido')
+                .max(255)
+                .required('Favor informar o email'),
+              password: Yup.string()
+                .max(255)
+                .required('Favor informar o password'),
+            })}
+            onSubmit={async (
+              values,
+              { setErrors, setStatus, setSubmitting },
+            ) => {
+              try {
+                await dispatch(signIn(values.email, values.password));
+                navigate('/');
+              } catch (error) {
+                const message =
+                  (error.response && error.response.data.message) ||
+                  'Alguma coisa aconteceu';
+
+                setStatus({ success: false });
+                setErrors({ submit: message });
+                setSubmitting(false);
+              }
+            }}
+          >
+            {({ errors, handleChange, handleSubmit, isSubmitting, values }) => (
+              <form noValidate className={classes.form} onSubmit={handleSubmit}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="E-mail"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                  error={Boolean(errors.email)}
+                  value={values.email}
+                  onChange={handleChange}
+                  helperText={errors.email}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Senha"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  value={values.password}
+                  onChange={handleChange}
+                  error={Boolean(errors.password)}
+                  helperText={errors.password}
+                />
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                  type="submit"
+                  disbled={isSubmitting}
+                >
+                  Entrar
+                </Button>
+                {errors.submit && (
+                  <FormHelperText error>{errors.submit}</FormHelperText>
+                )}
+                <Grid container>
+                  <Grid item>
+                    <Link>Esqueceu sua senha?</Link>
+                  </Grid>
+                  <Grid item>
+                    <Link>Não tem uma conta? Registre-se</Link>
+                  </Grid>
+                </Grid>
+              </form>
             )}
-            <Grid container>
-              <Grid item>
-                <Link>Esqueceu sua senha?</Link>
-              </Grid>
-              <Grid item>
-                <Link>Não tem uma conta? Registre-se</Link>
-              </Grid>
-            </Grid>
-          </form>
+          </Formik>
           <Copyright />
         </Box>
       </Grid>
